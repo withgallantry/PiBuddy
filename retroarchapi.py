@@ -145,6 +145,7 @@ class RetroArchPythonApi(object):
                 print "Worked"
             except:
                 self._running = False
+                print "Didn't Work"
             time.sleep(0.1)
 
     def start(self, rom_path, core_path):
