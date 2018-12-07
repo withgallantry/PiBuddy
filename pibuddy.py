@@ -15,7 +15,7 @@ retroarchPid = getRetroarchPid()
 
 print retroarchPid
 
-_process_stdin = open(os.path.join('/proc', retroarchPid, 'fd', '0'), 'a')
+_process_stdin = open(os.path.join('/proc', str(retroarchPid), 'fd', '0'), 'a')
 print _process_stdin
 
 _process_stdin.write('checkalive\n')
