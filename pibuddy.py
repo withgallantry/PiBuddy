@@ -13,16 +13,16 @@ def getRetroarchPid():
 # api.toggle_pause()
 retroarchPid = getRetroarchPid()
 
-print retroarchPid
+# print retroarchPid
 
-_process_stdin = open(os.path.join('/proc', str(retroarchPid), 'fd', '0'), 'a')
-print _process_stdin
+# _process_stdin = open(os.path.join('/proc', str(retroarchPid), 'fd', '0'), 'a')
+# print _process_stdin
 
-try:
-    _process_stdin.write('checkalive\n')
-    print "Worked"
-except:
-    print "Didn't work"
+# try:
+#     _process_stdin.write('checkalive\n')
+#     print "Worked"
+# except:
+#     print "Didn't work"
 
-# api = RetroArchPythonApi(retroarch_pid=retroarchPid,settings_path='settings')
+api = RetroArchPythonApi(retroarch_pid=retroarchPid,settings_path='settings')
 # api.toggle_pause()
