@@ -16,8 +16,8 @@ class BLE:
                 for i in range(len(items)):
                     if "PiBuddy" in items[i]:
                         mac = items[i].split(' ')[0]
-                        print mac
-                sensorName = "PiBuddy"
+                        sensorName = "PiBuddy"
+                        return mac
 
     def connect(self, mac_str, random=1):
         if random == 0:
@@ -42,5 +42,6 @@ class BLE:
 
 
 x = BLE()
-x.getDevice('PiBuddy')
+macAddress = x.getDevice('PiBuddy')
+print macAddress
 # x.disconnect()
