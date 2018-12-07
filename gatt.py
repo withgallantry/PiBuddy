@@ -1,7 +1,7 @@
-import bluetooth
+from bluetooth.ble import DiscoveryService
 
-nearby_devices = bluetooth.discover_devices(lookup_names=True)
-print("found %d devices" % len(nearby_devices))
+service = DiscoveryService()
+devices = service.discover(2)
 
-for addr, name in nearby_devices:
-    print("  %s - %s" % (addr, name))
+for address, name in devices.items():
+    print("name: {}, address: {}".format(name, address))
