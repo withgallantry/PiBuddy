@@ -25,8 +25,8 @@ except:
 
 if running:
     print _process_stdin
-    _process_stdin.write('FULLSCREEN_TOGGLE\n')
-    print "Toggle Pause"
+    _process_stdin.write('RESET\n')
+    print "Send Reset"
 
     # api = RetroArchPythonApi(retroarch_pid=retroarchPid,settings_path='settings')
     # api.toggle_pause()
