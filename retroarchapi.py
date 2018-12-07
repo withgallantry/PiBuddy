@@ -182,6 +182,7 @@ class RetroArchPythonApi(object):
         self.logger.info('With Core: %s' % core_path)
 
         self._process_stdin = open(os.path.join('/proc', str(self.pid), 'fd', '0'), 'a')
+        print self._process_stdin
 
         self._process_stdout = open(os.path.join('/proc', str(self.pid), 'fd', '1'), 'a')
 
