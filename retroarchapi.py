@@ -118,7 +118,7 @@ class RetroArchPythonApi(object):
 
         while 1:
             try:
-                line = self._process.stderr.readline().rstrip()
+                line = self._process_stdout.readline().rstrip()
 
                 if 'checkalive' in line:
                     continue
@@ -139,7 +139,7 @@ class RetroArchPythonApi(object):
         self.logger.debug('Starting Check Alive Thread')
         while 1:
             try:
-                self._process.stdin.write('checkalive\n')
+                self._process_stdin.write('checkalive\n')
                 self._running = True
             except:
                 self._running = False
@@ -179,8 +179,11 @@ class RetroArchPythonApi(object):
         self.logger.info('Starting Rom: %s' % rom_path)
         self.logger.info('With Core: %s' % core_path)
 
-        self._process = Popen('/proc/' + self.pid + '/fd/1',stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+        self._process_stdout = open('/proc/' + self.pid + '/fd/1',stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE)
+
+        self._process_stdin = open('/proc/' + self.pid + '/fd/0',stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE)
 
         # self._process = subprocess.Popen(cmd, stdin=subprocess.PIPE,
         #                                  stdout=subprocess.PIPE,
@@ -213,7 +216,7 @@ class RetroArchPythonApi(object):
             self.toggle_pause()
             time.sleep(0.2)
 
-        self._process.stdin.write('QUIT\n')
+        self._process_stdin.write('QUIT\n')
         while self._running:
             time.sleep(0.1)
 
@@ -233,7 +236,7 @@ class RetroArchPythonApi(object):
         self._clear_stderr_queue()
 
         self.logger.info('Send: Toggle Pause')
-        self._process.stdin.write('PAUSE_TOGGLE\n')
+        self._process_stdin.write('PAUSE_TOGGLE\n')
         time.sleep(0.1)
 
         for _ in xrange(len(self._stderr_queue.queue)):
@@ -264,7 +267,7 @@ class RetroArchPythonApi(object):
 
         self._clear_stderr_queue()
         self.logger.info('Send: Fullscreen Toggle')
-        self._process.stdin.write('FULLSCREEN_TOGGLE\n')
+        self._process_stdin.write('FULLSCREEN_TOGGLE\n')
         time.sleep(0.5)
         found = False
         for _ in xrange(len(self._stderr_queue.queue)):
@@ -313,7 +316,7 @@ class RetroArchPythonApi(object):
             toggle_pause = True
             self.toggle_pause()
 
-        self._process.stdin.write('LOAD_STATE\n')
+        self._process_stdin.write('LOAD_STATE\n')
 
         for _ in xrange(len(self._stderr_queue.queue)):
             answer = self._stderr_queue.get()
@@ -356,7 +359,7 @@ class RetroArchPythonApi(object):
             toggle_pause = True
             self.toggle_pause()
 
-        self._process.stdin.write('SAVE_STATE\n')
+        self._process_stdin.write('SAVE_STATE\n')
         time.sleep(0.1)
 
         # Recieve Infos
@@ -401,7 +404,7 @@ class RetroArchPythonApi(object):
         if self._pause:
             self.toggle_pause()
 
-        self._process.stdin.write('RESET\n')
+        self._process_stdin.write('RESET\n')
         time.sleep(0.3)
 
         for _ in xrange(len(self._stderr_queue.queue)):
