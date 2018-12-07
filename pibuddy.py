@@ -6,12 +6,11 @@
 import os
 from retroarchapi import RetroArchPythonApi
 
-api = RetroArchPythonApi(retroarch_path='/opt/retropie/emulators/retroarch/bin/retroarch',settings_path='settings')
-
-
-def getpid():
+def getRetroarchPid():
     return os.popen('pidof retroarch').read()
 
 # [p.info for p in psutil.process_iter(attrs=['pid', 'name']) if 'python' in p.info['retroarch']]
 # api.toggle_pause()
-getpid()
+retroarchPid = getRetroarchPid()
+
+api = RetroArchPythonApi(retroarch_pid=retroarchPid,settings_path='settings')

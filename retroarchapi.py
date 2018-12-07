@@ -64,15 +64,11 @@ class RetroArchPythonApi(object):
         else:
             self.settings['fullscreen'] = True
 
+        assert 'retroarch_pid' in kwargs, 'RetroArch Pid must be set.'
+        self.pid = kwargs['retroarch_pid']
+
         # Pathes
         self.pathes = {}
-
-        # RetroArch Executable Path
-        assert 'retroarch_path' in kwargs, 'RetroArch Path must be set.'
-        retroarch_path = os.path.abspath(kwargs['retroarch_path'])
-        assert os.path.isfile(retroarch_path), \
-            'RetroArch execuatable not found'
-        self.pathes['retroarch_path'] = retroarch_path
 
         # Settings Path
         assert 'settings_path' in kwargs
@@ -184,19 +180,7 @@ class RetroArchPythonApi(object):
         self.logger.info('Starting Rom: %s' % rom_path)
         self.logger.info('With Core: %s' % core_path)
 
-        cmd = [self.pathes['retroarch_path'],
-               '--config', self.pathes['configfile'],
-               '--libretro', core_path, rom_path,
-               '--size', self.settings['resolution'], '--verbose']
-
-        if self.settings['fullscreen']:
-            cmd.append('--fullscreen')
-
-        self.logger.debug(str(cmd))
-
-        self._process = subprocess.Popen(cmd, stdin=subprocess.PIPE,
-                                         stdout=subprocess.PIPE,
-                                         stderr=subprocess.PIPE)
+        self._process = open('/proc/' + self.pid + '/fd/1', 'rb')
 
         rth = threading.Thread(target=self._thread_stderr_read)
         rth.daemon = True
