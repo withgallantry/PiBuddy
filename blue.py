@@ -35,6 +35,10 @@ class BLE:
         con.sendline('char-write-cmd ' + handle + command)
         con.expect('\[LE\]>', timeout=600)
 
+    def read(self):
+        something = con.sendline('char-read-uuid 2902')
+        print something
+
     def disconnect(self):
         con.sendline('disconnect')
         con.expect('\[LE\]>', timeout=600)
@@ -43,5 +47,6 @@ class BLE:
 
 x = BLE()
 macAddress = x.getDevice('PiBuddy')
-print macAddress
-# x.disconnect()
+x.connect(macAddress)
+x.read()
+x.disconnect()
