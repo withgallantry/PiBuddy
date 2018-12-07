@@ -6,5 +6,5 @@
 
 from retroarchapi import RetroArchPythonApi
 
-api = RetroArchPythonApi(retroarch_path='/usr/bin/retroarch',settings_path='settings')
+api = RetroArchPythonApi(retroarch_path='/opt/retropie/emulators/retroarch/bin/retroarch',settings_path='settings')
 api.toggle_pause()
