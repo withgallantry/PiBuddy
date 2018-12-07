@@ -12,7 +12,8 @@ import time
 import Queue
 import logging
 import threading
-import subprocess
+import os.path
+
 
 __version__ = 0.02
 __copyright__ = 'GPL V2'
@@ -179,9 +180,9 @@ class RetroArchPythonApi(object):
         self.logger.info('Starting Rom: %s' % rom_path)
         self.logger.info('With Core: %s' % core_path)
 
-        self._process_stdout = open('/proc/' + self.pid + '/fd/1', 'a')
+        self._process_stdin = open(os.path.join('/proc', str(self.pid), 'fd', '0'), 'a')
 
-        self._process_stdin = open('/proc/' + self.pid + '/fd/0', 'a')
+        self._process_stdout = open(os.path.join('/proc', str(self.pid), 'fd', '1'), 'a')
 
         # self._process = subprocess.Popen(cmd, stdin=subprocess.PIPE,
         #                                  stdout=subprocess.PIPE,
