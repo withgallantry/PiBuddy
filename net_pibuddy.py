@@ -4,10 +4,12 @@
 # This file originates from Bluups PiBuddy Project
 # Author: Bluup
 import os
-from subprocess import Popen, PIPE
+import subprocess
 
 try:
-    process = Popen(['echo', '-n', '"RESET"', '|', 'nc', '-u', '-w1', '127.0.0.1', '55355'], stdout=PIPE, stderr=PIPE)
+    subprocess.Popen("echo -n \"RESET\" | nc -u -w1 127.0.0.1 55355", stdin=subprocess.PIPE,
+                     stdout=subprocess.PIPE,
+                     stderr=subprocess.PIPE)
     print "Executed Reset"
 except:
     print "Cannot execute"
