@@ -5,7 +5,7 @@ import time
 
 class BLE:
     def discover(self):
-        proc = Popen(['sudo', 'timeout', '5s', 'hcitool', 'lescan'])
+        proc = Popen(['sudo', 'timeout', '5s', 'hcitool', 'lescan'], stdout=PIPE).communicate()
         lines = proc.stdout.readlines()
         print lines
 
