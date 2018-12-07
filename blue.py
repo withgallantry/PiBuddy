@@ -12,8 +12,11 @@ class BLE:
             scan = open("scan.txt", "r")
             readscan = scan.read()
             if "PiBuddy" in readscan:
-                thing = readscan.split('\n')
-                print thing
+                items = readscan.split('\n')
+                for i in range(len(items)):
+                    if "PiBuddy" in items[i]:
+                        mac = items[i].split(' ')[0]
+                        print mac
                 sensorName = "PiBuddy"
 
     def connect(self, mac_str, random=1):
