@@ -19,7 +19,6 @@ __copyright__ = 'GPL V2'
 
 
 class RetroArchPythonApi(object):
-
     """Usage:
     api = RetroArch(retroarch_path='<Path>',settings_path='<Path>')
     #Options:
@@ -179,7 +178,12 @@ class RetroArchPythonApi(object):
         self.logger.info('Starting Rom: %s' % rom_path)
         self.logger.info('With Core: %s' % core_path)
 
-        self._process = open('/proc/' + self.pid + '/fd/1', 'rb')
+        self._process = open('/proc/' + self.pid + '/fd/1', 'rb', stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE)
+
+        # self._process = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+        #                                  stdout=subprocess.PIPE,
+        # stderr=subprocess.PIPE)
 
         rth = threading.Thread(target=self._thread_stderr_read)
         rth.daemon = True
