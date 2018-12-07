@@ -37,5 +37,5 @@ class BLE:
 
 
 x = BLE()
-x.discover()
+x.getDevice('PiBuddy')
 # x.disconnect()
