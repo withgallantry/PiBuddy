@@ -5,6 +5,7 @@ import os
 
 
 class BLE:
+    con = None
     def getDevice(self, name):
         sensorName = ''
         while sensorName != "PiBuddy":
@@ -36,7 +37,7 @@ class BLE:
         con.sendline('char-write-cmd ' + handle + command)
         con.expect('\[LE\]>', timeout=600)
 
-    def read(self, con):
+    def read(self):
         something = con.sendline('char-read-uuid 2902')
         print something
 
