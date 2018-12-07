@@ -143,7 +143,7 @@ class RetroArchPythonApi(object):
                 self._running = True
             except:
                 self._running = False
-            time.sleep(0.1)
+            # time.sleep(0.1)
 
     def start(self, rom_path, core_path):
 
