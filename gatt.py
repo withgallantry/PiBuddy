@@ -1,4 +1,4 @@
-from bluepy import Peripheral, ADDR_TYPE_RANDOM, AssignedNumbers
+from bluepy.btle import Peripheral, ADDR_TYPE_RANDOM, AssignedNumbers
 
 import time
 
