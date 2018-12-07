@@ -6,6 +6,7 @@ import os
 
 class BLE:
     con = None
+
     def getDevice(self, name):
         sensorName = ''
         while sensorName != "PiBuddy":
@@ -31,20 +32,20 @@ class BLE:
         con.expect('\[LE\]>', timeout=600)
         con.sendline('connect')
         con.expect('\[LE\]>', timeout=600)
-        return con
+        self.con = con
 
     def writeCmd(self, handle, command):
-        con.sendline('char-write-cmd ' + handle + command)
-        con.expect('\[LE\]>', timeout=600)
+        self.con.sendline('char-write-cmd ' + handle + command)
+        self.con.expect('\[LE\]>', timeout=600)
 
     def read(self):
-        something = con.sendline('char-read-uuid 2902')
+        something = self.con.sendline('char-read-uuid 2902')
         print something
 
     def disconnect(self):
-        con.sendline('disconnect')
-        con.expect('\[LE\]>', timeout=600)
-        con.sendline('exit')
+        self.con.sendline('disconnect')
+        self.con.expect('\[LE\]>', timeout=600)
+        self.con.sendline('exit')
 
 
 x = BLE()
