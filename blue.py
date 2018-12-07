@@ -41,7 +41,7 @@ class BLE:
     def read(self):
         something = self.con.sendline('char-read-uuid 6E400003-B5A3-F393-E0A9-E50E24DCCA9E')
         self.con.expect('\[LE\]>', timeout=600)
-        print self.con.after
+        print self.con.before
         print something
 
     def disconnect(self):
