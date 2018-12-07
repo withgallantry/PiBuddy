@@ -5,8 +5,9 @@
 # Author: Bluup
 import os
 import subprocess
-from bluetooth.ble import DiscoveryService
-devices = service.discover(2)
+import pygatt
+
+adapter = pygatt.BGAPIBackend()
 
 for address, name in devices.items():
     print("name: {}, address: {}".format(name, address))
