@@ -4,25 +4,28 @@
 # This file originates from Bluups PiBuddy Project
 # Author: Bluup
 import os
-from retroarchapi import RetroArchPythonApi
 
 def getRetroarchPid():
     return os.popen('pidof retroarch').read().splitlines()[0]
 
-# [p.info for p in psutil.process_iter(attrs=['pid', 'name']) if 'python' in p.info['retroarch']]
-# api.toggle_pause()
+
 retroarchPid = getRetroarchPid()
 
-# print retroarchPid
+print retroarchPid
 
-# _process_stdin = open(os.path.join('/proc', str(retroarchPid), 'fd', '0'), 'a')
-# print _process_stdin
+running = False
 
-# try:
-#     _process_stdin.write('checkalive\n')
-#     print "Worked"
-# except:
-#     print "Didn't work"
+try:
+    _process_stdin = open(os.path.join('/proc', str(retroarchPid), 'fd', '0'), 'a')
+    _process_stdin.write('checkalive\n')
+    running = True
+    print "Retroarch alive"
+except:
+    print "Didn't work"
 
-api = RetroArchPythonApi(retroarch_pid=retroarchPid,settings_path='settings')
-# api.toggle_pause()
+if running:
+    _process_stdin.write('PAUSE_TOGGLE\n')
+    print "Toggle Pause"
+
+    # api = RetroArchPythonApi(retroarch_pid=retroarchPid,settings_path='settings')
+    # api.toggle_pause()
