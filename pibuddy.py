@@ -14,4 +14,4 @@ def getpid():
 
 # [p.info for p in psutil.process_iter(attrs=['pid', 'name']) if 'python' in p.info['retroarch']]
 # api.toggle_pause()
-print(getpid())
+getpid()
