@@ -12,7 +12,7 @@ class BLE:
             scan = open("scan.txt", "r")
             readscan = scan.read()
             if "PiBuddy" in readscan:
-                thing = readscan.split(' ')
+                thing = readscan.split('\n')
                 print thing
                 sensorName = "PiBuddy"
 
