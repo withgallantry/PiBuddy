@@ -25,7 +25,7 @@ except:
 
 if running:
     print _process_stdin
-    _process_stdin.stdin.write('RESET\n')
+    _process_stdin.write('RESET\n')
     print "Send Reset"
 
     # api = RetroArchPythonApi(retroarch_pid=retroarchPid,settings_path='settings')
