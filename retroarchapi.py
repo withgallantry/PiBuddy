@@ -142,6 +142,7 @@ class RetroArchPythonApi(object):
             try:
                 self._process_stdin.write('checkalive\n')
                 self._running = True
+                print "Worked"
             except:
                 self._running = False
             time.sleep(0.1)
