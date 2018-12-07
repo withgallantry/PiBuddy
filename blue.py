@@ -50,5 +50,5 @@ class BLE:
 x = BLE()
 macAddress = x.getDevice('PiBuddy')
 connection = x.connect(macAddress)
-x.read(connection)
+x.read()
 x.disconnect()
