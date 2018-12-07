@@ -105,7 +105,6 @@ class RetroArchPythonApi(object):
                           % self.settings['fullscreen'])
         self.logger.debug('Resolution: %s'
                           % self.settings['resolution'])
-        self.logger.debug('RetroArch Path: %s' % retroarch_path)
         self.logger.debug('Settings Path: %s'
                           % self.pathes['settings'])
         self.logger.debug('Bios Path: %s'
