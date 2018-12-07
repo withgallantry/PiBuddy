@@ -143,7 +143,6 @@ class RetroArchPythonApi(object):
                 self._running = True
             except:
                 self._running = False
-            print time
             time.sleep(0.1)
 
     def start(self, rom_path, core_path):
@@ -179,7 +178,7 @@ class RetroArchPythonApi(object):
         self.logger.info('Starting Rom: %s' % rom_path)
         self.logger.info('With Core: %s' % core_path)
 
-        self._process = subprocess.Popen('/proc/' + self.pid + '/fd/1', 'rb', stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+        self._process = open('/proc/' + self.pid + '/fd/1', 'rb', stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE)
 
         # self._process = subprocess.Popen(cmd, stdin=subprocess.PIPE,
