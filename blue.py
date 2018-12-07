@@ -40,6 +40,7 @@ class BLE:
 
     def read(self):
         something = self.con.sendline('char-read-uuid 6E400003-B5A3-F393-E0A9-E50E24DCCA9E')
+        self.con.expect('\[LE\]>', timeout=600)
         print self.con.readline()
         print something
 
@@ -51,6 +52,7 @@ class BLE:
 
 x = BLE()
 macAddress = x.getDevice('PiBuddy')
-connection = x.connect(macAddress)
+print macAddress
+x.connect(macAddress)
 x.read()
 x.disconnect()
