@@ -179,11 +179,9 @@ class RetroArchPythonApi(object):
         self.logger.info('Starting Rom: %s' % rom_path)
         self.logger.info('With Core: %s' % core_path)
 
-        self._process_stdout = open('/proc/' + self.pid + '/fd/1',stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                             stderr=subprocess.PIPE)
+        self._process_stdout = open('/proc/' + self.pid + '/fd/1', 'a')
 
-        self._process_stdin = open('/proc/' + self.pid + '/fd/0',stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE)
+        self._process_stdin = open('/proc/' + self.pid + '/fd/0', 'a')
 
         # self._process = subprocess.Popen(cmd, stdin=subprocess.PIPE,
         #                                  stdout=subprocess.PIPE,
