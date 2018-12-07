@@ -6,13 +6,14 @@ import subprocess
 
 class BLE:
     def getDevice(self, name):
+        sensorName = ''
         while sensorName != "PiBuddy":
             os.system("hcitool lescan> scan.txt & pkill --signal SIGINT hcitool")
             scan = open("scan.txt", "r")
             readscan = scan.read()
             if "PiBuddy" in readscan:
                 print "SensorTag found."
-                sensortag = "PiBuddy"
+                sensorName = "PiBuddy"
 
     def connect(self, mac_str, random=1):
         if random == 0:
