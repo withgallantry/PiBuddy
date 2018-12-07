@@ -1,13 +1,11 @@
 import pexpect
-from subprocess import Popen
+from subprocess import Popen, PIPE
 import time
-proc = subprocess.Popen(['sudo','timeout', '20s','hcitool', 'lescan'],stdout=subprocess.PIPE)
 
 
 class BLE:
-
     def discover(self):
-        proc = Popen(['sudo','timeout', '20s','hcitool', 'lescan'],stdout=subprocess.PIPE)
+        proc = Popen(['sudo', 'timeout', '20s', 'hcitool', 'lescan'], stdout=PIPE)
         proc.wait()
         lines = proc.stdout.readlines()
         print lines
@@ -32,6 +30,7 @@ class BLE:
         con.sendline('disconnect')
         con.expect('\[LE\]>', timeout=600)
         con.sendline('exit')
+
 
 x = BLE()
 x.discover()
