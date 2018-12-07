@@ -54,5 +54,6 @@ x = BLE()
 macAddress = x.getDevice('PiBuddy')
 print macAddress
 x.connect(macAddress)
+time.sleep(1)
 x.read()
 x.disconnect()
