@@ -14,3 +14,4 @@ def getRetroarchPid():
 retroarchPid = getRetroarchPid()
 
 api = RetroArchPythonApi(retroarch_pid=retroarchPid,settings_path='settings')
+api.toggle_pause()
