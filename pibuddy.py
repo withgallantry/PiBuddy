@@ -7,7 +7,7 @@ import os
 from retroarchapi import RetroArchPythonApi
 
 def getRetroarchPid():
-    return os.popen('pidof retroarch').read()
+    return os.popen('pidof retroarch').read().splitlines()[0]
 
 # [p.info for p in psutil.process_iter(attrs=['pid', 'name']) if 'python' in p.info['retroarch']]
 # api.toggle_pause()
