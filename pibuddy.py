@@ -13,6 +13,8 @@ def getRetroarchPid():
 # api.toggle_pause()
 retroarchPid = getRetroarchPid()
 
+print retroarchPid
+
 _process_stdin = open(os.path.join('/proc', retroarchPid, 'fd', '0'), 'a')
 print _process_stdin
 
