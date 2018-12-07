@@ -6,8 +6,8 @@ import subprocess
 
 class BLE:
     def discover(self):
-        proc = Popen(['sudo', 'timeout', '5s', 'hcitool', 'lescan'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        lines = proc.stdout.readlines()
+        proc = Popen(['sudo', 'timeout', '5s', 'hcitool', 'lescan'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()
+        lines = proc
         print lines
 
     def connect(self, mac_str, random=1):
