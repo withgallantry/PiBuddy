@@ -49,6 +49,7 @@ class RetroArchPythonApi(object):
     def __init__(self, **kwargs):
 
         # Logging
+        logging.basicConfig()
         self.logger = logging.getLogger('RetroArchPythonApi')
 
         # Settings
