@@ -1,7 +1,7 @@
 import pexpect
 from subprocess import Popen
 import time
-import subprocess
+import os
 
 
 class BLE:
