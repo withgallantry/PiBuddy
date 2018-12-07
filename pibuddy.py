@@ -24,6 +24,7 @@ except:
     print "Didn't work"
 
 if running:
+    print _process_stdin
     _process_stdin.write('PAUSE_TOGGLE\n')
     print "Toggle Pause"
 
