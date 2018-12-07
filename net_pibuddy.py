@@ -7,9 +7,7 @@ import os
 import subprocess
 
 try:
-    subprocess.Popen("echo -n \"RESET\" | nc -u -w1 127.0.0.1 55355", stdin=subprocess.PIPE,
-                     stdout=subprocess.PIPE,
-                     stderr=subprocess.PIPE)
+    subprocess.call("echo -n \"RESET\" | nc -u -w1 127.0.0.1 55355")
     print "Executed Reset"
 except:
     print "Cannot execute"
