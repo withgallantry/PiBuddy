@@ -5,10 +5,14 @@ import subprocess
 
 
 class BLE:
-    def discover(self):
-        proc = Popen(['sudo', 'timeout', '5s', 'hcitool', 'lescan'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()
-        lines = proc
-        print lines
+    def getDevice(self, name):
+        while sensorName != "PiBuddy":
+            os.system("hcitool lescan> scan.txt & pkill --signal SIGINT hcitool")
+            scan = open("scan.txt", "r")
+            readscan = scan.read()
+            if "PiBuddy" in readscan:
+                print "SensorTag found."
+                sensortag = "PiBuddy"
 
     def connect(self, mac_str, random=1):
         if random == 0:
