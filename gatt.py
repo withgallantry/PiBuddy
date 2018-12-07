@@ -1,7 +1,7 @@
-from gattlib import DiscoveryService
+import bluetooth
 
-service = DiscoveryService("hci0")
-devices = service.discover(2)
+nearby_devices = bluetooth.discover_devices(lookup_names=True)
+print("found %d devices" % len(nearby_devices))
 
-for address, name in devices.items():
-    print("name: {}, address: {}".format(name, address))
+for addr, name in nearby_devices:
+    print("  %s - %s" % (addr, name))
