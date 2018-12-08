@@ -18,7 +18,7 @@ class PiBuddy():
 
 
 scanner = Scanner().withDelegate(ScanDelegate())
-devices = scanner.scan(10.0)
+devices = scanner.scan(2.0)
 
 for dev in devices:
     # print "Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi)
