@@ -27,3 +27,5 @@ for dev in devices:
             print "Found PiBuddy at: ", dev.addr
             print "Connecting..."
             buddy = PiBuddy(dev.addr)
+            services = buddy.getServices()
+            print services
