@@ -15,7 +15,7 @@ class ScanDelegate(DefaultDelegate):
 class PiBuddy():
     def __init__(self, address):
         self.device = Peripheral(address)
-        self.read = self.device.getCharacteristics(uuid="6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
+        self.read = self.device.getCharacteristics(uuid="6E400003-B5A3-F393-E0A9-E50E24DCCA9E")[0]
         self.readHandle = self.read.getHandle()
 
     def getCurrentStatus(self):
