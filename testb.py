@@ -1,23 +1,19 @@
-import sys
-import binascii
-import struct
-import time
-from bluepy.btle import UUID, Peripheral
+from bluepy.btle import Scanner, DefaultDelegate
 
-button_service_uuid = UUID("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
-button_char_uuid    = UUID("6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
+class ScanDelegate(DefaultDelegate):
+    def __init__(self):
+        DefaultDelegate.__init__(self)
 
-p = Peripheral("80:7D:3A:C4:4C:16", "random")
-ButtonService=p.getServiceByUUID(button_service_uuid)
+    def handleDiscovery(self, dev, isNewDev, isNewData):
+        if isNewDev:
+            print "Discovered device", dev.addr
+        elif isNewData:
+            print "Received new data from", dev.addr
 
-try:
-    ch = ButtonService.getCharacteristics(button_char_uuid)[0]
-    print ch
-    if (ch.supportsRead()):
-        while 1:
-            val = binascii.b2a_hex(ch.read())
-            print ("0x" + val)
-            time.sleep(1)
+scanner = Scanner().withDelegate(ScanDelegate())
+devices = scanner.scan(10.0)
 
-finally:
-    p.disconnect()
+for dev in devices:
+    print "Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi)
+    for (adtype, desc, value) in dev.getScanData():
+        print "  %s = %s" % (desc, value)
