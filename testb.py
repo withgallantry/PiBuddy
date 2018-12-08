@@ -25,7 +25,7 @@ class PiBuddy():
         self.device = Peripheral(address)
         self.read = self.device.getCharacteristics(uuid="6E400003-B5A3-F393-E0A9-E50E24DCCA9E")[0]
         self.readHandle = self.read.getHandle()
-        self.device..setDelegate(NotificationDelegate())
+        self.device.setDelegate(NotificationDelegate())
         return self.device
 
     def getCurrentStatus(self):
