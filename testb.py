@@ -52,4 +52,4 @@ for dev in devices:
                     # handleNotification() was called
                     continue
 
-            print "Waiting..."
+                print "Waiting..."
