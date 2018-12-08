@@ -15,9 +15,10 @@ class ScanDelegate(DefaultDelegate):
 class PiBuddy():
     def __init__(self, address):
         self.device = Peripheral(address)
+        self.read = self.device.getCharacteristics(uuid="6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
 
-    def getServices(self):
-        return self.device.getCharacteristics(uuid="6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
+    def getCurrentStatus(self):
+        return self.device.readCharacteristic(self.read);
 
 
 scanner = Scanner().withDelegate(ScanDelegate())
@@ -30,5 +31,5 @@ for dev in devices:
             print "Found PiBuddy at: ", dev.addr
             print "Connecting..."
             buddy = PiBuddy(dev.addr)
-            services = buddy.getServices()
-            print services
+            current = buddy.getCurrentStatus()
+            print current
