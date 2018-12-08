@@ -3,7 +3,7 @@ import logging
 logging.basicConfig()
 logging.getLogger('pygatt').setLevel(logging.DEBUG)
 
-adapter = pygatt.BGAPIBackend()
+adapter = pygatt.GATTToolBackend()
 
 def print_this(h, stuff):
     print(stuff)
