@@ -12,6 +12,7 @@ ButtonService=p.getServiceByUUID(button_service_uuid)
 
 try:
     ch = ButtonService.getCharacteristics(button_char_uuid)[0]
+    print ch
     if (ch.supportsRead()):
         while 1:
             val = binascii.b2a_hex(ch.read())
