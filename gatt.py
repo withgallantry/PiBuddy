@@ -11,7 +11,7 @@ def print_this(h, stuff):
 adapter.start()
 devices = adapter.scan()
 for device in devices:
-    if "custom_device" in device["name"].lower():
+    if "PiBuddy" in device["name"]:
         print("found device")
         break
 
