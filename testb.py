@@ -18,7 +18,7 @@ class PiBuddy():
         self.read = self.device.getCharacteristics(uuid="6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
 
     def getCurrentStatus(self):
-        return self.device.readCharacteristic(self.read);
+        return self.device.readCharacteristic(0xb6af0cd8);
 
 
 scanner = Scanner().withDelegate(ScanDelegate())
