@@ -1,4 +1,5 @@
 from bluepy.btle import Scanner, DefaultDelegate, Peripheral
+import time
 
 
 class ScanDelegate(DefaultDelegate):
@@ -25,18 +26,17 @@ class PiBuddy():
         self.device = Peripheral(address)
         self.read = self.device.getCharacteristics(uuid="6E400003-B5A3-F393-E0A9-E50E24DCCA9E")[0]
         self.readHandle = self.read.getHandle()
-        self.device.setDelegate(NotificationDelegate())
+        self.device..setDelegate(NotificationDelegate(params))
 
     def getCurrentStatus(self):
         return self.device.readCharacteristic(self.readHandle)
 
-    def getDevice(self):
-        return self.device
 
 scanner = Scanner().withDelegate(ScanDelegate())
 devices = scanner.scan(2.0)
 
 deviceFound = False
+firstRun = True
 
 for dev in devices:
     # print "Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi)
@@ -45,11 +45,18 @@ for dev in devices:
             print "Found PiBuddy at: ", dev.addr
             print "Connecting..."
             buddy = PiBuddy(dev.addr)
-            current = buddy.getCurrentStatus()
             deviceFound = True
-            while deviceFound:
-                if buddy.getDevice().waitForNotifications(20.0):
-                    # handleNotification() was called
-                    continue
+            print current
 
-                print "Waiting..."
+            while deviceFound:
+                try:
+                    current = buddy.getCurrentStatus()
+
+                    if current != old and not firstRun:
+                        print "Actioning"
+                        firstRun = False
+                        old = buddy.getCurrentStatus()
+                except:
+                    print "Error Reading"
+
+                time.sleep(1)
