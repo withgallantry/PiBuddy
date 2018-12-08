@@ -11,10 +11,9 @@ def print_this(h, stuff):
 adapter.start()
 devices = adapter.scan()
 for device in devices:
-    print device
-    # if "PiBuddy" in device["name"]:
-    #     print("found device")
-    #     break
+    if device["name"] is not None and "PiBuddy" in device["name"]:
+        print("found device")
+        break
 
 device = adapter.connect(device["address"])
 chars = device.discover_characteristics() # I get some type of a warning here. "UUID b'ffe1' is of unknown type"
