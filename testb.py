@@ -1,4 +1,5 @@
-from bluepy.btle import Scanner, DefaultDelegate
+from bluepy.btle import Scanner, DefaultDelegate, Peripheral
+
 
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
@@ -10,11 +11,19 @@ class ScanDelegate(DefaultDelegate):
         elif isNewData:
             print "Received new data from", dev.addr
 
+
+class PiBuddy():
+    def __init__(self, address):
+        self.device = Peripheral(address)
+
+
 scanner = Scanner().withDelegate(ScanDelegate())
 devices = scanner.scan(10.0)
 
 for dev in devices:
-    print "Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi)
+    # print "Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi)
     for (adtype, desc, value) in dev.getScanData():
         if "PiBuddy" in dev.getValueText(adtype):
-            print "Found PiBuddy at: ", dev.addr;
+            print "Found PiBuddy at: ", dev.addr
+            print "Connecting..."
+            buddy = PiBuddy(dev.addr)
