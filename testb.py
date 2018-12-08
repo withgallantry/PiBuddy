@@ -26,11 +26,12 @@ class PiBuddy():
         self.read = self.device.getCharacteristics(uuid="6E400003-B5A3-F393-E0A9-E50E24DCCA9E")[0]
         self.readHandle = self.read.getHandle()
         self.device.setDelegate(NotificationDelegate())
-        return self.device
 
     def getCurrentStatus(self):
         return self.device.readCharacteristic(self.readHandle)
 
+    def getDevice(self):
+        return self.device
 
 scanner = Scanner().withDelegate(ScanDelegate())
 devices = scanner.scan(2.0)
@@ -47,7 +48,7 @@ for dev in devices:
             current = buddy.getCurrentStatus()
             deviceFound = True
             while deviceFound:
-                if buddy.waitForNotifications(1.0):
+                if buddy.getDevice().waitForNotifications(1.0):
                     # handleNotification() was called
                     continue
 
