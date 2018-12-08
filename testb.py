@@ -37,7 +37,6 @@ for dev in devices:
             print "Connecting..."
             buddy = PiBuddy(dev.addr)
             deviceFound = True
-            print current
 
             while deviceFound:
                 try:
