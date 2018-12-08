@@ -14,7 +14,7 @@ try:
     adapter.start()
     device = adapter.connect('80:7d:3a:c4:4c:16')
 
-    device.subscribe("6E400003-B5A3-F393-E0A9-E50E24DCCA9E",
+    device.subscribe("6e400003-b5a3-f393-e0a9-e50e24dcca9e",
                      callback=handle_data)
 finally:
     adapter.stop()
