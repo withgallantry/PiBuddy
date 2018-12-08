@@ -12,11 +12,21 @@ class ScanDelegate(DefaultDelegate):
             print "Received new data from", dev.addr
 
 
+class NotificationDelegate(DefaultDelegate):
+    def __init__(self):
+        DefaultDelegate.__init__(self)
+
+    def handleNotification(self, cHandle, data):
+        print data
+
+
 class PiBuddy():
     def __init__(self, address):
         self.device = Peripheral(address)
         self.read = self.device.getCharacteristics(uuid="6E400003-B5A3-F393-E0A9-E50E24DCCA9E")[0]
         self.readHandle = self.read.getHandle()
+        self.device..setDelegate(NotificationDelegate())
+        return self.device
 
     def getCurrentStatus(self):
         return self.device.readCharacteristic(self.readHandle)
@@ -24,6 +34,8 @@ class PiBuddy():
 
 scanner = Scanner().withDelegate(ScanDelegate())
 devices = scanner.scan(2.0)
+
+deviceFound = False
 
 for dev in devices:
     # print "Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi)
@@ -33,4 +45,10 @@ for dev in devices:
             print "Connecting..."
             buddy = PiBuddy(dev.addr)
             current = buddy.getCurrentStatus()
-            print current
+            deviceFound = True
+            while deviceFound:
+                if buddy.waitForNotifications(1.0):
+                    # handleNotification() was called
+                    continue
+
+            print "Waiting..."
