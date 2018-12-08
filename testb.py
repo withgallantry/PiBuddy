@@ -48,7 +48,7 @@ for dev in devices:
             current = buddy.getCurrentStatus()
             deviceFound = True
             while deviceFound:
-                if buddy.getDevice().waitForNotifications(1.0):
+                if buddy.getDevice().waitForNotifications(20.0):
                     # handleNotification() was called
                     continue
 
