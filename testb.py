@@ -17,7 +17,7 @@ class PiBuddy():
         self.device = Peripheral(address)
 
     def getServices(self):
-        return self.device.getServices()
+        return self.device.getCharacteristics()
 
 
 scanner = Scanner().withDelegate(ScanDelegate())
