@@ -10,6 +10,7 @@ def handle_data(handle, value):
     """
     print("Received data: %s" % hexlify(value))
 
+
 try:
     adapter.start()
     device = adapter.connect('80:7d:3a:c4:4c:16')
@@ -18,4 +19,5 @@ try:
                      callback=handle_data)
 finally:
     print "Waiting on data"
+    input("Press ENTER to exit")
     # adapter.stop()
