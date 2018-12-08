@@ -15,6 +15,6 @@ devices = scanner.scan(10.0)
 
 for dev in devices:
     print "Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi)
-    for (addr, adtype, desc, value) in dev.getScanData():
+    for (adtype, desc, value) in dev.getScanData():
         if "PiBuddy" in dev.getValueText(adtype):
-            print "Found PiBuddy at: ", addr;
+            print "Found PiBuddy at: ", dev.addr;
